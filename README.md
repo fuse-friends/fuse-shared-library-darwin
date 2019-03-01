@@ -53,11 +53,11 @@ Using a GYP file this can be done like this:
     "target_name": "fuse_example",
     "include_dirs": [
       # include it like this
-      "<!(node -e \"require('fuse-shared-library/include')\")"
+      "<!(node -e \"require('fuse-shared-library-darwin/include')\")"
     ],
     "libraries": [
       # link it like this
-      "<!(node -e \"require('fuse-shared-library/lib')\")"
+      "<!(node -e \"require('fuse-shared-library-darwin/lib')\")"
     ],
     "sources": [
       "your_program.cc"
@@ -70,7 +70,7 @@ Using a GYP file this can be done like this:
     "dependencies": ["fuse_example"],
     "copies": [{
       "destination": "build/Release",
-      "files": [ "<!(node -e \"require('fuse-shared-library/lib')\")" ],
+      "files": [ "<!(node -e \"require('fuse-shared-library-darwin/lib')\")" ],
     }]
   }]
 }
