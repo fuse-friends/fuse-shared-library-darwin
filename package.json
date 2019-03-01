@@ -1,0 +1,33 @@
+{
+  "name": "fuse-shared-library-darwin",
+  "version": "0.0.0",
+  "description": "A module containing the dylib needed to run FUSE on Mac (darwin).",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mafintosh/fuse-shared-library-darwin.git"
+  },
+  "keywords": [
+    "fuse",
+    "shared",
+    "library",
+    "prebuild",
+    "osxfuse",
+    "mac"
+  ],
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/fuse-shared-library-darwin/issues"
+  },
+  "homepage": "https://github.com/mafintosh/fuse-shared-library-darwin#readme",
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}
