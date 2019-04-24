@@ -25,9 +25,10 @@ function configure (cb) {
   isConfigured(function (_, yes) {
     if (yes) return cb(null)
     runAll([
-      [ 'chmod', '+s', path.join(OSXFUSE, 'osxfuse.fs/Contents/Resources/load_osxfuse') ],
-      [ 'cp', '-r', path.join(OSXFUSE, 'osxfuse.fs'), '/Library/Filesystems/' ],
-      [ 'touch', path.join('/Library/Filesystems/osxfuse.fs/configured') ],
+      [ 'cp', '-a', path.join(OSXFUSE, 'osxfuse.fs'), '/Library/Filesystems/' ],
+      [ 'chown', '-R', 'root:wheel', '/Library/Filesystems/osxfuse.fs' ],
+      [ 'chmod', '+s', '/Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfuse' ],
+      [ 'touch', '/Library/Filesystems/osxfuse.fs/configured' ],
       [ '/Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfuse' ]
     ], cb)
   })
