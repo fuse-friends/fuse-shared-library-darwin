@@ -21,4 +21,8 @@ cp "$OUT/unpacked/Core.pkg/Payload/usr/local/lib/libosxfuse.dylib" "$OUT/"
 
 rm -rf "$OUT/unpacked" "$OUT/osxfuse-latest.dmg"
 
+echo 'cd "$1"' > "$OUT/setup-links.sh"
+chmod +x "$OUT/setup-links.sh"
+node "$DIRNAME/generate-links.js" "$OUT/osxfuse.fs/Contents/Extensions" >> "$OUT/setup-links.sh"
+
 install_name_tool -id "@loader_path/libosxfuse.dylib" "$OUT/libosxfuse.dylib"
