@@ -1,6 +1,6 @@
 {
   "name": "fuse-shared-library-darwin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A module containing the dylib needed to run FUSE on Mac (darwin).",
   "main": "index.js",
   "directories": {
