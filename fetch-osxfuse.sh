@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LATEST_DMG='https://github.com/osxfuse/osxfuse/releases/download/osxfuse-3.8.3/osxfuse-3.8.3.dmg'
+LATEST_DMG='https://github.com/osxfuse/osxfuse/releases/download/osxfuse-3.10.3/osxfuse-3.10.3.dmg'
 DMG_VOLUME='/Volumes/FUSE for macOS'
 DIRNAME="$(dirname $0)"
 OUT="$DIRNAME/osxfuse"
