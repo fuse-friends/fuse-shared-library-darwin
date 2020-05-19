@@ -84,3 +84,6 @@ and unwrap the shared library and more.
 ## License
 
 MIT
+
+See the [osxfuse license](https://github.com/osxfuse/osxfuse/blob/master/LICENSE.txt) for the terms involving commercial redistribution,
+for the osxfuse part.
