@@ -25,10 +25,10 @@ function configure (cb) {
   isConfigured(function (_, yes) {
     if (yes) return cb(null)
     runAll([
-      [ 'cp', '-r', path.join(OSXFUSE, 'osxfuse.fs'), '/Library/Filesystems/' ],
+      [ 'mkdir', '-p', '/Library/Filesystems/osxfuse.fs' ],
+      [ 'tar', 'xzf', path.join(OSXFUSE, 'osxfuse.fs.tgz'), '-C', '/Library/Filesystems/osxfuse.fs' ],
       [ 'chown', '-R', 'root:wheel', '/Library/Filesystems/osxfuse.fs' ],
       [ 'chmod', '+s', '/Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfuse' ],
-      [ path.join(OSXFUSE, 'setup-links.sh'), '/Library/Filesystems/osxfuse.fs/Contents/Extensions' ],
       [ 'touch', path.join('/Library/Filesystems/osxfuse.fs/configured') ],
       [ '/Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfuse' ]
     ], cb)
@@ -54,6 +54,8 @@ function runAll (cmds, cb) {
 
 function run (args, cb) {
   const child = spawn(args[0], args.slice(1))
+
+  child.stderr.pipe(process.stdout)
 
   child.stderr.resume()
   child.stdout.resume()
