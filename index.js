@@ -44,7 +44,7 @@ function configure (cb) {
 function isConfigured (cb) {
   fs.readFile('/Library/Filesystems/osxfuse.fs/configured', 'utf-8', function (err, str) {
     if (err && err.code !== 'ENOENT') return cb(err)
-    cb(null, str.trim() === OSXFUSE_VERSION)
+    cb(null, !!str && str.trim() === OSXFUSE_VERSION)
   })
 }
 
