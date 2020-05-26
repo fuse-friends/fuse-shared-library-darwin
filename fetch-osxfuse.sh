@@ -2,6 +2,7 @@
 
 cd "$(dirname $0)"
 
+# if you bump the version here remember to update it in index.js also.
 LATEST_DMG='https://github.com/osxfuse/osxfuse/releases/download/osxfuse-3.10.4/osxfuse-3.10.4.dmg'
 DMG_VOLUME='/Volumes/FUSE for macOS'
 DIRNAME="$PWD"

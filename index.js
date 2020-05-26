@@ -2,6 +2,7 @@ const fs = require('fs')
 const { spawn } = require('child_process')
 const path = require('path')
 
+const OSXFUSE_VERSION = '3.10.4'
 const OSXFUSE = path.join(__dirname, 'osxfuse')
 const lib = path.join(OSXFUSE, 'libosxfuse.dylib')
 const include = path.join(OSXFUSE, 'include')
@@ -29,16 +30,21 @@ function configure (cb) {
       [ 'tar', 'xzf', path.join(OSXFUSE, 'osxfuse.fs.tgz'), '-C', '/Library/Filesystems/osxfuse.fs' ],
       [ 'chown', '-R', 'root:wheel', '/Library/Filesystems/osxfuse.fs' ],
       [ 'chmod', '+s', '/Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfuse' ],
-      [ 'touch', path.join('/Library/Filesystems/osxfuse.fs/configured') ],
+      writeConfigured,
       [ '/Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfuse' ]
     ], cb)
+
+    function writeConfigured (cb) {
+      const configured = path.join('/Library/Filesystems/osxfuse.fs/configured')
+      fs.writeFile(configured, OSXFUSE_VERSION, cb)
+    }
   })
 }
 
 function isConfigured (cb) {
-  fs.stat('/Library/Filesystems/osxfuse.fs/configured', function (err, st) {
+  fs.readFile('/Library/Filesystems/osxfuse.fs/configured', 'utf-8', function (err, str) {
     if (err && err.code !== 'ENOENT') return cb(err)
-    cb(null, !!st)
+    cb(null, str.trim() === OSXFUSE_VERSION)
   })
 }
 
@@ -48,14 +54,13 @@ function runAll (cmds, cb) {
   function loop (err) {
     if (err) return cb(err)
     if (!cmds.length) return cb(null)
+    if (typeof cmds[0] === 'function') return cmds[0](loop)
     run(cmds.shift(), loop)
   }
 }
 
 function run (args, cb) {
   const child = spawn(args[0], args.slice(1))
-
-  child.stderr.pipe(process.stdout)
 
   child.stderr.resume()
   child.stdout.resume()
