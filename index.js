@@ -54,7 +54,7 @@ function runAll (cmds, cb) {
   function loop (err) {
     if (err) return cb(err)
     if (!cmds.length) return cb(null)
-    if (typeof cmds[0] === 'function') return cmds[0](loop)
+    if (typeof cmds[0] === 'function') return cmds.shift()(loop)
     run(cmds.shift(), loop)
   }
 }
