@@ -32,7 +32,7 @@ You should configure libfuse using the above API before using the
 shared library, otherwise the program using fuse will error.
 
 When configuring the only thing this module does is copy
-the fuse kernel extension and some helpers to `/Library/Filesystems/osxfuse.fs`,
+the fuse kernel extension and some helpers to `/Library/Filesystems/macfuse.fs`,
 and tries to load the kernel extension once.
 
 The first time it loads on mac a user prompt will trigger that allows
@@ -78,12 +78,12 @@ Using a GYP file this can be done like this:
 
 ## Development
 
-Use the `./fetch-osxfuse.sh` script to fetch OSX fuse
+Use the `./fetch-macfuse.sh` script to fetch macFUSE
 and unwrap the shared library and more.
 
 ## License
 
 MIT
 
-See the [osxfuse license](https://github.com/osxfuse/osxfuse/blob/master/LICENSE.txt) for the terms involving commercial redistribution,
-for the osxfuse part.
+See the [macFUSE license](https://github.com/macfuse/macfuse/blob/master/LICENSE.txt) for the terms involving commercial redistribution,
+for the macFUSE part.
